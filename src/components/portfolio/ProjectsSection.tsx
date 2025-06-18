@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useTranslation } from "@/hooks/useTranslation";
+import Image from "next/image";
 
 
 
@@ -211,8 +212,11 @@ const ProjectsSection = () => {
                             transition={{ duration: 0.6, ease: "easeInOut" }}
                             className={`absolute inset-0 ${project.images[currentSlides[index] || 0]?.color} flex items-center justify-center`}
                           >
-                            <img
+                            <Image
                               src={project.images[currentSlides[index] || 0]?.src}
+                              width={300}
+                              height={300}
+
                               alt={`${project.title} slide ${currentSlides[index] || 0}`}
                               className="w-full h-full object-cover rounded-xl"
                               onError={(e) => {
