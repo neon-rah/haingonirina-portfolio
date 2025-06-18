@@ -5,8 +5,8 @@ import { useRef } from "react";
 import { Download, GraduationCap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
-import Image from 'next/image';
+import { useToast } from "@/hooks/action-types";
+
 import { useTranslation } from "@/hooks/useTranslation";
 
 
@@ -122,7 +122,7 @@ const AboutSection = () => {
                   <div className="w-full h-full rounded-full bg-slate-700 flex items-center justify-center relative">
                     {/* Profile Image */}
                     <img
-                      src={"/assets/profile/profile-8.png"}
+                      src={"/assets/profile/profile.png"}
                       alt="Haingonirina RAHARISOA"
                       className="w-full h-full object-cover rounded-full"
                       onError={(e) => {

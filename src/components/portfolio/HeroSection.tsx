@@ -10,7 +10,7 @@ import {
   Download,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "@/hooks/action-types";
 import { useTranslation } from "@/hooks/useTranslation";
 
 
