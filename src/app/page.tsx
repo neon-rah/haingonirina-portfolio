@@ -1,12 +1,15 @@
-// src/app/page.tsx
+"use client";
 import NavigationHeader from "@/components/portfolio/NavigationHeader";
 import HeroSection from "@/components/portfolio/HeroSection";
 import AboutSection from "@/components/portfolio/AboutSection";
 import SkillsSection from "@/components/portfolio/SkillsSection";
 import ProjectsSection from "@/components/portfolio/ProjectsSection";
 import ContactSection from "@/components/portfolio/ContactSection";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function HomePage() {
+
+  const {t} = useTranslation();
   return (
     <div className="min-h-screen bg-slate-900">
       <NavigationHeader />
@@ -26,12 +29,12 @@ export default function HomePage() {
                 Haingonirina RAHARISOA
               </h3>
               <p className="text-slate-400">
-                Computer Science Student & Full Stack Developer
+                {t("footer.title")}
               </p>
             </div>
             <div className="border-t border-violet-500/20 pt-6">
               <p className="mb-2 text-slate-300">
-                © 2025 Haingonirina RAHARISOA. All rights reserved.
+                {t("footer.copyright")}
               </p>
 
             </div>

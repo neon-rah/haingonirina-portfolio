@@ -6,29 +6,30 @@ import { Github, ChevronLeft, ChevronRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useTranslation } from "@/hooks/useTranslation";
 
-// Définir un type pour les projets
+
+
 interface Project {
   title: string;
   description: string;
   images: { src: string; color: string }[];
   technologies: string[];
-  frontend?: string; // Optionnel
-  backend?: string; // Optionnel
-  backendJava?: string; // Optionnel
-  backendNode?: string; // Optionnel
-  github?: string; // Optionnel
+  frontend?: string;
+  backend?: string;
+  backendJava?: string;
+  backendNode?: string;
+  github?: string;
   featured: boolean;
-  separateRepos?: boolean; // Optionnel
-  tripleRepos?: boolean; // Optionnel
+  separateRepos?: boolean;
+  tripleRepos?: boolean;
 }
 
 const ProjectsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [currentSlides, setCurrentSlides] = useState<{ [key: number]: number }>(
-    {},
-  );
+  const [currentSlides, setCurrentSlides] = useState<{ [key: number]: number }>({});
+  const { t } = useTranslation();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -59,15 +60,15 @@ const ProjectsSection = () => {
 
   const projects: Project[] = [
     {
-      title: "Culinary Platform",
-      description:
-        "A full-stack platform for sharing and looking for recipes with dual backend architecture (Java and Node.js). Includes real-time features with WebSocket and JWT authentication.",
+      title: t("projects.culinary.title"),
+      description: t("projects.culinary.description"),
       images: [
-        { src: "/images/malagasy-culinary-1.jpg", color: "bg-gradient-to-br from-green-500 to-emerald-600" },
-        { src: "/images/malagasy-culinary-2.jpg", color: "bg-gradient-to-br from-purple-500 to-pink-600" },
-        { src: "/images/malagasy-culinary-3.jpg", color: "bg-gradient-to-br from-indigo-500 to-purple-600" },
-        { src: "/images/malagasy-culinary-4.jpg", color: "bg-gradient-to-br from-teal-500 to-cyan-600" },
-        { src: "/images/malagasy-culinary-5.jpg", color: "bg-gradient-to-br from-rose-500 to-pink-600" },
+        { src: "/assets/projects/recipe-hub-1.png", color: "bg-gradient-to-br from-green-500 to-emerald-600" },
+        { src: "/assets/projects/recipe-hub-2.png", color: "bg-gradient-to-br from-purple-500 to-pink-600" },
+        { src: "/assets/projects/recipe-hub-3.png", color: "bg-gradient-to-br from-indigo-500 to-purple-600" },
+        { src: "/assets/projects/recipe-hub-4.png", color: "bg-gradient-to-br from-teal-500 to-cyan-600" },
+        { src: "/assets/projects/recipe-hub-5.png", color: "bg-gradient-to-br from-rose-500 to-pink-600" },
+        { src: "/assets/projects/recipe-hub-5.png", color: "bg-gradient-to-br from-yellow-500 to-orange-600" },
       ],
       technologies: ["Java", "Spring Boot", "Node.js", "Express", "PostgreSQL", "Next.js", "Tailwind CSS", "WebSocket", "JWT"],
       frontend: "https://github.com/neon-rah/recipe-hub-frontend",
@@ -77,44 +78,36 @@ const ProjectsSection = () => {
       tripleRepos: true,
     },
     {
-      title: "Auto-Ecole Admin Panel",
-      description:
-        "An administrative interface for an auto school, built with Laravel and Next.js. Manages user data, cours, and exams sessions with a responsive design.",
+      title: t("projects.autoecole.title"),
+      description: t("projects.autoecole.description"),
       images: [
-        { src: "/images/auto-ecole-1.jpg", color: "bg-gradient-to-br from-blue-500 to-cyan-600" },
-        { src: "/images/auto-ecole-2.jpg", color: "bg-gradient-to-br from-red-500 to-rose-600" },
-        { src: "/images/auto-ecole-3.jpg", color: "bg-gradient-to-br from-indigo-500 to-purple-600" },
+        { src: "/assets/projects/admin-panel-1.png", color: "bg-gradient-to-br from-blue-500 to-cyan-600" },
+        { src: "/assets/projects/admin-panel-2.png", color: "bg-gradient-to-br from-red-500 to-rose-600" },
+        { src: "/assets/projects/admin-panel-3.png", color: "bg-gradient-to-br from-indigo-500 to-purple-600" },
+        { src: "/assets/projects/admin-panel-4.png", color: "bg-gradient-to-br from-teal-500 to-cyan-600" },
+        { src: "/assets/projects/admin-panel-5.png", color: "bg-gradient-to-br from-rose-500 to-pink-600" },
       ],
       technologies: ["Next.js", "Laravel", "PHP", "PostgreSQL", "Tailwind CSS"],
-      frontend: "https://github.com/neon-rah/auto-ecole-frontend",
-      backend: "https://github.com/neon-rah/auto-ecole-backend",
+      // frontend: "https://github.com/neon-rah/auto-ecole-frontend",
+      // backend: "https://github.com/neon-rah/auto-ecole-backend",
+      github:"https://github.com/neon-rah/driveschool-admin-panel.git",
       featured: true,
-      separateRepos: true, // Ajouté pour cohérence
+      // separateRepos: true,
     },
     {
-      "title": "Sentiment Analysis Mini-Project",
-      "description": "A Python-based application for sentiment analysis of tweets using a TensorFlow neural network, featuring a CustomTkinter GUI for real-time predictions and file-based analysis with the Sentiment140 dataset.",
-      "images": [
-        {
-          "src": "/assets/projects/sentiment-analysis-1.png",
-          "color": "bg-gradient-to-br from-blue-500 to-cyan-600"
-        },
-        {
-          "src": "/assets/projects/sentiment-analysis-2.png",
-          "color": "bg-gradient-to-br from-green-500 to-teal-600"
-        },
-        {
-          "src": "/assets/projects/sentiment-analysis-3.png",
-          "color": "bg-gradient-to-br from-purple-500 to-indigo-600"
-        }
+      title: t("projects.sentiment.title"),
+      description: t("projects.sentiment.description"),
+      images: [
+        { src: "/assets/projects/sentiment-analysis-1.png", color: "bg-gradient-to-br from-blue-500 to-cyan-600" },
+        { src: "/assets/projects/sentiment-analysis-2.png", color: "bg-gradient-to-br from-green-500 to-teal-600" },
+        { src: "/assets/projects/sentiment-analysis-3.png", color: "bg-gradient-to-br from-purple-500 to-indigo-600" },
       ],
-      "technologies": ["Python", "TensorFlow", "CustomTkinter", "Pandas", "NumPy", "Scikit-learn"],
-      "github": "https://github.com/neon-rah/ai-sentiment-analysis.git ",
-      "featured": true
-    }
+      technologies: ["Python", "TensorFlow", "CustomTkinter", "Pandas", "NumPy", "Scikit-learn"],
+      github: "https://github.com/neon-rah/ai-sentiment-analysis.git",
+      featured: true,
+    },
   ];
 
-  // Initialize all projects with slide 0
   useEffect(() => {
     const initialSlides: { [key: number]: number } = {};
     projects.forEach((_, index) => {
@@ -123,7 +116,6 @@ const ProjectsSection = () => {
     setCurrentSlides(initialSlides);
   }, []);
 
-  // Auto-cycle images for all projects
   useEffect(() => {
     const intervals: { [key: number]: NodeJS.Timeout } = {};
 
@@ -133,19 +125,18 @@ const ProjectsSection = () => {
           () => {
             setCurrentSlides((prev) => ({
               ...prev,
-              [projectIndex]:
-                ((prev[projectIndex] || 0) + 1) % project.images.length,
+              [projectIndex]: ((prev[projectIndex] || 0) + 1) % project.images.length,
             }));
           },
           4000 + projectIndex * 1000,
-        ); // Stagger more - each project cycles at different timing
+        );
       }
     });
 
     return () => {
       Object.values(intervals).forEach((interval) => clearInterval(interval));
     };
-  }, [projects.length]); // Depend on projects.length to ensure re-setup if needed
+  }, [projects.length]);
 
   const nextSlide = (projectIndex: number, totalSlides: number) => {
     setCurrentSlides((prev) => ({
@@ -157,8 +148,7 @@ const ProjectsSection = () => {
   const prevSlide = (projectIndex: number, totalSlides: number) => {
     setCurrentSlides((prev) => ({
       ...prev,
-      [projectIndex]:
-        ((prev[projectIndex] || 0) - 1 + totalSlides) % totalSlides,
+      [projectIndex]: ((prev[projectIndex] || 0) - 1 + totalSlides) % totalSlides,
     }));
   };
 
@@ -187,12 +177,11 @@ const ProjectsSection = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              Featured Projects
+              {t("projects.title")}
             </h2>
             <div className="w-20 h-1 bg-gradient-to-r from-violet-500 to-purple-500 mx-auto mb-6"></div>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-              A showcase of my academic and personal projects demonstrating
-              full-stack development skills.
+              {t("projects.description")}
             </p>
           </motion.div>
 
@@ -214,7 +203,6 @@ const ProjectsSection = () => {
                       {/* Auto-cycling Image Carousel */}
                       <div className="relative order-2 lg:order-1">
                         <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg">
-                          {/* Current slide with smooth transitions */}
                           <motion.div
                             key={`project-${index}-slide-${currentSlides[index] || 0}`}
                             initial={{ opacity: 0, scale: 1.05 }}
@@ -236,15 +224,12 @@ const ProjectsSection = () => {
                             />
                           </motion.div>
 
-                          {/* Manual navigation arrows */}
                           {project.images.length > 1 && (
                             <>
                               <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                onClick={() =>
-                                  prevSlide(index, project.images.length)
-                                }
+                                onClick={() => prevSlide(index, project.images.length)}
                                 className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/60 text-white hover:bg-black/80 transition-all duration-200 backdrop-blur-sm z-10"
                               >
                                 <ChevronLeft size={20} />
@@ -252,9 +237,7 @@ const ProjectsSection = () => {
                               <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                onClick={() =>
-                                  nextSlide(index, project.images.length)
-                                }
+                                onClick={() => nextSlide(index, project.images.length)}
                                 className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/60 text-white hover:bg-black/80 transition-all duration-200 backdrop-blur-sm z-10"
                               >
                                 <ChevronRight size={20} />
@@ -262,7 +245,6 @@ const ProjectsSection = () => {
                             </>
                           )}
 
-                          {/* Slide indicators */}
                           {project.images.length > 1 && (
                             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-10">
                               {project.images.map((_, slideIndex) => (
@@ -281,7 +263,6 @@ const ProjectsSection = () => {
                           )}
                         </div>
 
-                        {/* Featured badge */}
                         {project.featured && (
                           <motion.div
                             initial={{ scale: 0 }}
@@ -289,9 +270,9 @@ const ProjectsSection = () => {
                             transition={{ delay: 0.3, type: "spring" }}
                             className="absolute -top-3 -right-3"
                           >
-                            {/*<Badge className="bg-gradient-to-r from-violet-500 to-purple-500 text-white border-0 shadow-lg">*/}
-                            {/*  Featured*/}
-                            {/*</Badge>*/}
+                            {/* <Badge className="bg-gradient-to-r from-violet-500 to-purple-500 text-white border-0 shadow-lg">
+                              {t("projects.featured")}
+                            </Badge> */}
                           </motion.div>
                         )}
                       </div>
@@ -307,13 +288,11 @@ const ProjectsSection = () => {
                           <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-violet-300 transition-colors duration-300">
                             {project.title}
                           </h3>
-
                           <p className="text-gray-300 leading-relaxed">
                             {project.description}
                           </p>
                         </div>
 
-                        {/* Technologies */}
                         <div className="flex flex-wrap gap-2">
                           {project.technologies.map((tech, techIndex) => (
                             <motion.div
@@ -334,9 +313,7 @@ const ProjectsSection = () => {
                           ))}
                         </div>
 
-                        {/* GitHub Links */}
                         <div className="space-y-3">
-                          {/* Single repository */}
                           {project.github && (
                             <motion.div
                               whileHover={{ scale: 1.01, y: -1 }}
@@ -353,13 +330,12 @@ const ProjectsSection = () => {
                                   rel="noopener noreferrer"
                                 >
                                   <Github size={18} className="mr-2" />
-                                  View Code
+                                  {t("projects.viewCode")}
                                 </a>
                               </Button>
                             </motion.div>
                           )}
 
-                          {/* Separate frontend/backend repositories */}
                           {project.separateRepos && (
                             <div className="grid sm:grid-cols-2 gap-3">
                               <motion.div
@@ -377,7 +353,7 @@ const ProjectsSection = () => {
                                     rel="noopener noreferrer"
                                   >
                                     <Github size={18} className="mr-2" />
-                                    Frontend
+                                    {t("projects.viewFrontend")}
                                   </a>
                                 </Button>
                               </motion.div>
@@ -396,14 +372,13 @@ const ProjectsSection = () => {
                                     rel="noopener noreferrer"
                                   >
                                     <Github size={18} className="mr-2" />
-                                    Backend
+                                    {t("projects.viewBackend")}
                                   </a>
                                 </Button>
                               </motion.div>
                             </div>
                           )}
 
-                          {/* Triple repositories (frontend + 2 backends) */}
                           {project.tripleRepos && (
                             <div className="space-y-3">
                               <motion.div
@@ -421,7 +396,7 @@ const ProjectsSection = () => {
                                     rel="noopener noreferrer"
                                   >
                                     <Github size={18} className="mr-2" />
-                                    Frontend (Next.js)
+                                    {t("projects.viewFrontend")} (Next.js)
                                   </a>
                                 </Button>
                               </motion.div>
@@ -441,7 +416,7 @@ const ProjectsSection = () => {
                                       rel="noopener noreferrer"
                                     >
                                       <Github size={18} className="mr-2" />
-                                      Java/Spring Boot
+                                      {t("projects.viewBackendJava")}
                                     </a>
                                   </Button>
                                 </motion.div>
@@ -460,7 +435,7 @@ const ProjectsSection = () => {
                                       rel="noopener noreferrer"
                                     >
                                       <Github size={18} className="mr-2" />
-                                      Node.js/Express
+                                      {t("projects.viewBackendNode")}
                                     </a>
                                   </Button>
                                 </motion.div>

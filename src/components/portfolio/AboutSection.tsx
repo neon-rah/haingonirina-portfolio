@@ -7,11 +7,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import Image from 'next/image';
+import { useTranslation } from "@/hooks/useTranslation";
+
+
 
 const AboutSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const {toast} = useToast();
+  const { toast } = useToast();
+  const { t } = useTranslation();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -34,18 +38,15 @@ const AboutSection = () => {
     },
   };
 
-  // Function to handle resume download
   const handleDownloadResume = async () => {
     try {
       const response = await fetch('/cv/CV_Haingonirina_RAHARISOA.pdf');
       if (!response.ok) {
-        // throw new Error('File not found or server error');
         setTimeout(() => {
           toast({
-            title: "Error!",
-            description: "File not found or server error",
+            title: t("about.downloadError"),
+            description: t("about.downloadError"),
           });
-
         }, 1500);
       }
       const blob = await response.blob();
@@ -61,10 +62,9 @@ const AboutSection = () => {
       console.error('Error downloading resume:', error);
       setTimeout(() => {
         toast({
-          title: "Error!",
-          description: "Error downloading resume, please try again.",
+          title: t("about.downloadError"),
+          description: t("about.downloadError"),
         });
-
       }, 1500);
     }
   };
@@ -82,7 +82,7 @@ const AboutSection = () => {
           {/* Section Title */}
           <motion.div variants={itemVariants} className="text-center mb-12 sm:mb-16">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
-              About Me
+              {t("about.title")}
             </h2>
             <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-violet-500 to-purple-500 mx-auto"></div>
           </motion.div>
@@ -119,13 +119,11 @@ const AboutSection = () => {
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="w-full h-full rounded-full bg-slate-700 flex items-center justify-center relative overflow-hidden">
+                  <div className="w-full h-full rounded-full bg-slate-700 flex items-center justify-center relative">
                     {/* Profile Image */}
                     <img
-                      src={"/assets/profile-8.png"}
+                      src={"/assets/profile/profile-8.png"}
                       alt="Haingonirina RAHARISOA"
-                      // width={50}
-                      // height={50}
                       className="w-full h-full object-cover rounded-full"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
@@ -149,15 +147,15 @@ const AboutSection = () => {
             {/* Content Side */}
             <motion.div variants={itemVariants} className="space-y-6 w-full">
               <h3 className="text-xl sm:text-2xl font-semibold text-white">
-                Passionate Computer Science Student
+                {t("about.subtitle")}
               </h3>
 
               <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
-                I&#39;m Haingonirina RAHARISOA, a passionate computer science student, currently in my 3rd year of a degree at the École de Management et d&#39;Innovation Technologique (EMIT) in Fianarantsoa. Curious and eager to learn, I thrive in exploring technologies like Java, Spring Boot, Next.js, and PostgreSQL, where I blend creativity and rigor to craft innovative solutions.
+                {t("about.description1")}
               </p>
 
               <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
-                My journey is driven by a thirst for discovery and a love for clean code. I enjoy tackling technical challenges, deepening my knowledge, and infusing a human touch into my work, while continuously growing in both frontend and backend domains.
+                {t("about.description2")}
               </p>
 
               {/* Student Status Card */}
@@ -171,9 +169,9 @@ const AboutSection = () => {
                       <GraduationCap className="text-violet-400" size={24} />
                     </motion.div>
                     <div>
-                      <p className="font-medium text-white">Current Status</p>
-                      <p className="text-slate-300">Computer Science Student</p>
-                      <p className="text-sm text-violet-400">Ecole de Management et d'Innovation Technologique</p>
+                      <p className="font-medium text-white">{t("about.status")}</p>
+                      <p className="text-slate-300">{t("about.statusValue")}</p>
+                      <p className="text-sm text-violet-400">{t("about.statusSubtitle")}</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -191,7 +189,7 @@ const AboutSection = () => {
                   className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white border-0 shadow-lg shadow-violet-500/25"
                 >
                   <Download className="mr-2" size={16} />
-                  Download Resume
+                  {t("about.downloadResume")}
                 </Button>
               </motion.div>
             </motion.div>

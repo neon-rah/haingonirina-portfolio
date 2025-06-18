@@ -4,35 +4,9 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "@/hooks/useTranslation";
 
-// Temporary inline translation until hook is working
-const useTranslation = () => {
-  const [language, setLanguage] = useState<"en" | "fr">("en");
 
-  const translations = {
-    en: {
-      "nav.home": "Home",
-      "nav.about": "About",
-      "nav.skills": "Skills",
-      "nav.projects": "Projects",
-      "nav.contact": "Contact",
-      "nav.portfolio": "Haingonirina.Rah",
-    },
-    fr: {
-      "nav.home": "Accueil",
-      "nav.about": "À propos",
-      "nav.skills": "Compétences",
-      "nav.projects": "Projets",
-      "nav.contact": "Contact",
-      "nav.portfolio": "Haingonirina.Rah",
-    },
-  };
-
-  const t = (key: string) =>
-    translations[language][key as keyof (typeof translations)["en"]] || key;
-
-  return { language, setLanguage, t };
-};
 
 const NavigationHeader = () => {
   const [isScrolled, setIsScrolled] = useState(false);

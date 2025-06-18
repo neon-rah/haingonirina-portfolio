@@ -6,13 +6,17 @@ import {
   Linkedin,
   Mail,
   Code2,
-  Sparkles, Download,
+  Sparkles,
+  Download,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "@/hooks/useTranslation";
+
 
 const HeroSection = () => {
-  const {toast} = useToast();
+  const { toast } = useToast();
+  const { t } = useTranslation();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -25,13 +29,11 @@ const HeroSection = () => {
     try {
       const response = await fetch('/cv/CV_Haingonirina_RAHARISOA.pdf');
       if (!response.ok) {
-        // throw new Error('File not found or server error');
         setTimeout(() => {
           toast({
-            title: "Error!",
-            description: "File not found or server error",
+            title: t("hero.error"),
+            description: t("hero.fileNotFound"),
           });
-
         }, 1500);
       }
       const blob = await response.blob();
@@ -47,10 +49,9 @@ const HeroSection = () => {
       console.error('Error downloading resume:', error);
       setTimeout(() => {
         toast({
-          title: "Error!",
-          description: "Error downloading resume, please try again.",
+          title: t("hero.error"),
+          description: t("hero.downloadError"),
         });
-
       }, 1500);
     }
   };
@@ -61,12 +62,8 @@ const HeroSection = () => {
       key={i}
       className="absolute w-1 h-1 bg-violet-400/20 rounded-full"
       initial={{
-        x:
-          Math.random() *
-          (typeof window !== "undefined" ? window.innerWidth : 1200),
-        y:
-          Math.random() *
-          (typeof window !== "undefined" ? window.innerHeight : 800),
+        x: Math.random() * (typeof window !== "undefined" ? window.innerWidth : 1200),
+        y: Math.random() * (typeof window !== "undefined" ? window.innerHeight : 800),
         opacity: 0,
       }}
       animate={{
@@ -90,30 +87,15 @@ const HeroSection = () => {
       {/* Professional dark background elements */}
       <div className="absolute inset-0 overflow-hidden">
         {particles}
-
-        {/* Subtle gradient orbs for depth */}
         <motion.div
           className="absolute top-1/4 left-1/4 w-96 h-96 bg-slate-700/10 rounded-full filter blur-3xl"
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.1, 0.2, 0.1],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-          }}
+          animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.2, 0.1] }}
+          transition={{ duration: 6, repeat: Infinity }}
         />
         <motion.div
           className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gray-700/10 rounded-full filter blur-3xl"
-          animate={{
-            scale: [1.1, 1, 1.1],
-            opacity: [0.1, 0.15, 0.1],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            delay: 2,
-          }}
+          animate={{ scale: [1.1, 1, 1.1], opacity: [0.1, 0.15, 0.1] }}
+          transition={{ duration: 8, repeat: Infinity, delay: 2 }}
         />
       </div>
 
@@ -137,7 +119,7 @@ const HeroSection = () => {
             >
               <Sparkles size={20} className="text-violet-400" />
             </motion.div>
-            <span>Hello, I&#39;m</span>
+            <span>{t("hero.greeting")}</span>
           </motion.div>
 
           {/* Animated name with gradient and glow */}
@@ -172,7 +154,7 @@ const HeroSection = () => {
               transition={{ delay: 1, duration: 1.5 }}
               className="inline-block text-wrap overflow-hidden whitespace-nowrap"
             >
-              Full Stack Developer Student
+              {t("hero.title")}
             </motion.span>
             <motion.span
               animate={{ opacity: [1, 0, 1] }}
@@ -190,7 +172,7 @@ const HeroSection = () => {
             transition={{ delay: 0.8 }}
             className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed"
           >
-            With a passion for discovery and innovation, I explore, learn, and bring ideas to life.
+            {t("hero.description")}
           </motion.p>
 
           {/* Animated CTA Buttons */}
@@ -200,31 +182,25 @@ const HeroSection = () => {
             transition={{ delay: 1 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
           >
-            <motion.div
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }}>
               <Button
                 size="lg"
                 onClick={() => scrollToSection("projects")}
                 className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white px-8 py-3 text-lg border-0 shadow-lg shadow-violet-500/25"
               >
                 <Code2 className="mr-2" size={20} />
-                View My Work
+                {t("hero.viewWork")}
               </Button>
             </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }}>
               <Button
                 variant="outline"
                 size="lg"
                 onClick={handleDownloadResume}
-                className="border-violet-500/20 bg-slate-700/50 backdrop-blur-sm text-white hover:bg-violet-500/10 hover:border-violet-300 px-8 py-3 text-lg hover:text-white "
+                className="border-violet-500/20 bg-slate-700/50 backdrop-blur-sm text-white hover:bg-violet-500/10 hover:border-violet-300 px-8 py-3 text-lg hover:text-white"
               >
                 <Download className="mr-2" size={16} />
-                Download resume
+                {t("hero.downloadResume")}
               </Button>
             </motion.div>
           </motion.div>

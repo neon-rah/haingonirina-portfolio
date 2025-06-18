@@ -9,11 +9,14 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "@/hooks/useTranslation";
+
 
 const ContactSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const { toast } = useToast();
+  const { t } = useTranslation();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -59,7 +62,6 @@ const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      // Simuler une requête API pour envoyer l'email (remplacez par votre endpoint réel)
       const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: {
@@ -75,24 +77,23 @@ const ContactSection = () => {
 
       if (!response.ok) {
         toast({
-          title: "Error!",
-          description: "Failed to send email. Please try again later.!",
-          variant: "destructive"
+          title: t("contact.error"),
+          description: t("contact.error"),
+          variant: "destructive",
         });
         throw new Error('Failed to send email');
       }
 
-      // Réinitialiser le formulaire et afficher une notification de succès
       toast({
-        title: "Success!",
-        description: "Your message has been sent successfully. I'll get back to you soon!",        
+        title: t("contact.success"),
+        description: t("contact.success"),
       });
       setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (error) {
       console.error('Error sending email:', error);
       toast({
-        title: "Error",
-        description: "An error occurred while sending your message. Please try again later.",
+        title: t("contact.error"),
+        description: t("contact.error"),
         variant: "destructive",
       });
     } finally {
@@ -103,19 +104,19 @@ const ContactSection = () => {
   const contactInfo = [
     {
       icon: <Mail className="text-violet-400" size={20} />,
-      title: "Email",
+      title: t("contact.email"),
       details: "haingonirina301@gmail.com",
       link: "mailto:haingonirina301@gmail.com",
     },
     {
       icon: <Phone className="text-purple-400" size={20} />,
-      title: "Phone",
+      title: t("contact.phone"),
       details: "+261 38 71 110 11",
       link: "tel:+261387111011",
     },
     {
       icon: <Github className="text-slate-300" size={20} />,
-      title: "GitHub",
+      title: t("contact.github"),
       details: "@neon-rah",
       link: "https://www.github.com/neon-rah",
     },
@@ -124,7 +125,7 @@ const ContactSection = () => {
   const socialLinks = [
     {
       icon: <Github size={20} />,
-      label: "GitHub",
+      label: t("contact.github"),
       url: "https://www.github.com/neon-rah",
       color: "hover:text-slate-300 hover:bg-slate-700/50",
     },
@@ -149,13 +150,11 @@ const ContactSection = () => {
           {/* Section Title */}
           <motion.div variants={itemVariants} className="text-center mb-12 sm:mb-16">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
-              Get In Touch
+              {t("contact.title")}
             </h2>
             <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-violet-500 to-purple-500 mx-auto mb-6"></div>
             <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto">
-              I&#39;m always excited to connect with fellow developers, potential
-              collaborators, or anyone interested in discussing technology and
-              projects.
+              {t("contact.description")}
             </p>
           </motion.div>
 
@@ -164,13 +163,10 @@ const ContactSection = () => {
             <motion.div variants={itemVariants} className="space-y-6 w-full">
               <div>
                 <h3 className="text-xl sm:text-2xl font-semibold text-white mb-4 sm:mb-6">
-                  Let&#39;s Connect
+                  {t("contact.subtitle")}
                 </h3>
                 <p className="text-base sm:text-lg text-slate-300 mb-4 sm:mb-8 leading-relaxed">
-                  Whether you want to discuss a project, collaborate on
-                  something exciting, or just want to say hello, I&#39;d love to
-                  hear from you. As a student, I&#39;m always eager to learn and
-                  contribute to meaningful projects.
+                  {t("contact.text")}
                 </p>
               </div>
 
@@ -196,10 +192,10 @@ const ContactSection = () => {
                             <a
                               href={info.link}
                               target={
-                                info.title === "GitHub" ? "_blank" : undefined
+                                info.title === t("contact.github") ? "_blank" : undefined
                               }
                               rel={
-                                info.title === "GitHub"
+                                info.title === t("contact.github")
                                   ? "noopener noreferrer"
                                   : undefined
                               }
@@ -220,7 +216,7 @@ const ContactSection = () => {
               {/* Social Links */}
               <div className="pt-4 sm:pt-6">
                 <h4 className="text-base sm:text-lg font-medium text-white mb-3 sm:mb-4">
-                  Follow Me
+                  {t("contact.followMe")}
                 </h4>
                 <div className="flex space-x-3 sm:space-x-4">
                   {socialLinks.map((social, index) => (
@@ -246,7 +242,7 @@ const ContactSection = () => {
               <Card className="w-full border-violet-500/20 bg-slate-800/50 backdrop-blur-sm shadow-xl">
                 <CardHeader>
                   <CardTitle className="text-lg sm:text-xl text-white">
-                    Send a Message
+                    {t("contact.sendMessage")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -254,21 +250,21 @@ const ContactSection = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="name" className="text-slate-300">
-                          Name
+                          {t("contact.name")}
                         </Label>
                         <Input
                           id="name"
                           name="name"
                           value={formData.name}
                           onChange={handleChange}
-                          placeholder="Your name"
+                          placeholder={t("contact.namePlaceholder")}
                           required
                           className="bg-slate-700/50 border-violet-500/30 text-white placeholder:text-slate-400 focus:border-violet-400 focus:ring-violet-400/20"
                         />
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="email" className="text-slate-300">
-                          Email
+                          {t("contact.email")}
                         </Label>
                         <Input
                           id="email"
@@ -276,7 +272,7 @@ const ContactSection = () => {
                           type="email"
                           value={formData.email}
                           onChange={handleChange}
-                          placeholder="your.email@example.com"
+                          placeholder={t("contact.emailPlaceholder")}
                           required
                           className="bg-slate-700/50 border-violet-500/30 text-white placeholder:text-slate-400 focus:border-violet-400 focus:ring-violet-400/20"
                         />
@@ -285,14 +281,14 @@ const ContactSection = () => {
 
                     <div className="space-y-2">
                       <Label htmlFor="subject" className="text-slate-300">
-                        Subject
+                        {t("contact.subject")}
                       </Label>
                       <Input
                         id="subject"
                         name="subject"
                         value={formData.subject}
                         onChange={handleChange}
-                        placeholder="What's this about?"
+                        placeholder={t("contact.subjectPlaceholder")}
                         required
                         className="bg-slate-700/50 border-violet-500/30 text-white placeholder:text-slate-400 focus:border-violet-400 focus:ring-violet-400/20"
                       />
@@ -300,14 +296,14 @@ const ContactSection = () => {
 
                     <div className="space-y-2">
                       <Label htmlFor="message" className="text-slate-300">
-                        Message
+                        {t("contact.message")}
                       </Label>
                       <Textarea
                         id="message"
                         name="message"
                         value={formData.message}
                         onChange={handleChange}
-                        placeholder="Tell me about your project or just say hello!"
+                        placeholder={t("contact.messagePlaceholder")}
                         rows={4}
                         required
                         className="bg-slate-700/50 border-violet-500/30 text-white placeholder:text-slate-400 focus:border-violet-400 focus:ring-violet-400/20 resize-none"
@@ -338,7 +334,7 @@ const ContactSection = () => {
                         ) : (
                           <Send className="mr-2" size={18} />
                         )}
-                        {isSubmitting ? "Sending..." : "Send Message"}
+                        {isSubmitting ? t("contact.sending") : t("contact.send")}
                       </Button>
                     </motion.div>
                   </form>
