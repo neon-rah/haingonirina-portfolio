@@ -9,12 +9,10 @@ import { Badge } from "@/components/ui/badge";
 import { useTranslation } from "@/hooks/useTranslation";
 import Image from "next/image";
 
-
-
 interface Project {
   title: string;
   description: string;
-  images: { src: string; color: string }[];
+  images: { src: string }[];
   technologies: string[];
   frontend?: string;
   backend?: string;
@@ -64,12 +62,12 @@ const ProjectsSection = () => {
       title: t("projects.culinary.title"),
       description: t("projects.culinary.description"),
       images: [
-        { src: "/assets/projects/recipe-hub-1.png", color: "bg-gradient-to-br from-green-500 to-emerald-600" },
-        { src: "/assets/projects/recipe-hub-2.png", color: "bg-gradient-to-br from-purple-500 to-pink-600" },
-        { src: "/assets/projects/recipe-hub-3.png", color: "bg-gradient-to-br from-indigo-500 to-purple-600" },
-        { src: "/assets/projects/recipe-hub-4.png", color: "bg-gradient-to-br from-teal-500 to-cyan-600" },
-        { src: "/assets/projects/recipe-hub-5.png", color: "bg-gradient-to-br from-rose-500 to-pink-600" },
-        { src: "/assets/projects/recipe-hub-5.png", color: "bg-gradient-to-br from-yellow-500 to-orange-600" },
+        { src: "/assets/projects/recipe-hub-1.png" },
+        { src: "/assets/projects/recipe-hub-2.png" },
+        { src: "/assets/projects/recipe-hub-3.png" },
+        { src: "/assets/projects/recipe-hub-4.png" },
+        { src: "/assets/projects/recipe-hub-5.png" },
+        { src: "/assets/projects/recipe-hub-5.png" },
       ],
       technologies: ["Java", "Spring Boot", "Node.js", "Express", "PostgreSQL", "Next.js", "Tailwind CSS", "WebSocket", "JWT"],
       frontend: "https://github.com/neon-rah/recipe-hub-frontend",
@@ -82,26 +80,23 @@ const ProjectsSection = () => {
       title: t("projects.autoecole.title"),
       description: t("projects.autoecole.description"),
       images: [
-        { src: "/assets/projects/admin-panel-1.png", color: "bg-gradient-to-br from-blue-500 to-cyan-600" },
-        { src: "/assets/projects/admin-panel-2.png", color: "bg-gradient-to-br from-red-500 to-rose-600" },
-        { src: "/assets/projects/admin-panel-3.png", color: "bg-gradient-to-br from-indigo-500 to-purple-600" },
-        { src: "/assets/projects/admin-panel-4.png", color: "bg-gradient-to-br from-teal-500 to-cyan-600" },
-        { src: "/assets/projects/admin-panel-5.png", color: "bg-gradient-to-br from-rose-500 to-pink-600" },
+        { src: "/assets/projects/admin-panel-1.png" },
+        { src: "/assets/projects/admin-panel-2.png" },
+        { src: "/assets/projects/admin-panel-3.png" },
+        { src: "/assets/projects/admin-panel-4.png" },
+        { src: "/assets/projects/admin-panel-5.png" },
       ],
       technologies: ["Next.js", "Laravel", "PHP", "PostgreSQL", "Tailwind CSS"],
-      // frontend: "https://github.com/neon-rah/auto-ecole-frontend",
-      // backend: "https://github.com/neon-rah/auto-ecole-backend",
-      github:"https://github.com/neon-rah/driveschool-admin-panel.git",
+      github: "https://github.com/neon-rah/driveschool-admin-panel.git",
       featured: true,
-      // separateRepos: true,
     },
     {
       title: t("projects.sentiment.title"),
       description: t("projects.sentiment.description"),
       images: [
-        { src: "/assets/projects/sentiment-analysis-1.png", color: "bg-gradient-to-br from-blue-500 to-cyan-600" },
-        { src: "/assets/projects/sentiment-analysis-2.png", color: "bg-gradient-to-br from-green-500 to-teal-600" },
-        { src: "/assets/projects/sentiment-analysis-3.png", color: "bg-gradient-to-br from-purple-500 to-indigo-600" },
+        { src: "/assets/projects/sentiment-analysis-1.png" },
+        { src: "/assets/projects/sentiment-analysis-2.png" },
+        { src: "/assets/projects/sentiment-analysis-3.png" },
       ],
       technologies: ["Python", "TensorFlow", "CustomTkinter", "Pandas", "NumPy", "Scikit-learn"],
       github: "https://github.com/neon-rah/ai-sentiment-analysis.git",
@@ -210,13 +205,12 @@ const ProjectsSection = () => {
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.95 }}
                             transition={{ duration: 0.6, ease: "easeInOut" }}
-                            className={`absolute inset-0 ${project.images[currentSlides[index] || 0]?.color} flex items-center justify-center`}
+                            className="absolute inset-0 flex items-center justify-center"
                           >
                             <Image
                               src={project.images[currentSlides[index] || 0]?.src}
                               width={300}
                               height={300}
-
                               alt={`${project.title} slide ${currentSlides[index] || 0}`}
                               className="w-full h-full object-cover rounded-xl"
                               onError={(e) => {
